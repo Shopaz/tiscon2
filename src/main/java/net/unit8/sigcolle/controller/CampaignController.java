@@ -21,6 +21,8 @@ import net.unit8.sigcolle.model.User;
 import org.pegdown.Extensions;
 import org.pegdown.PegDownProcessor;
 
+import java.util.List;
+
 import static enkan.util.HttpResponseUtils.RedirectStatusCode.SEE_OTHER;
 import static enkan.util.HttpResponseUtils.redirect;
 import static enkan.util.ThreadingUtils.some;
@@ -146,13 +148,15 @@ public class CampaignController {
 
         SignatureDao signatureDao = domaProvider.getDao(SignatureDao.class);
         int signatureCount = signatureDao.countByCampaignId(campaignId);
+        List<Signature> signitures=  signatureDao.selectAllByCampaignId(campaignId);
 
         return templateEngine.render("campaign/index",
                 "campaign", campaign,
                 "user", user,
                 "signatureCount", signatureCount,
                 "signature", form,
-                "message", message
+                "message", message,
+                "signitures",signitures
         );
     }
 }
