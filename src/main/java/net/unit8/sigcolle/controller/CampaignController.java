@@ -129,8 +129,11 @@ public class CampaignController {
      *
      * @param session ログインしているユーザsession
      */
+    //topページと同じキャンペーン一覧を表示
     public HttpResponse listCampaigns(Session session) {
-        throw new UnsupportedOperationException("実装してください !!");
+        //throw new UnsupportedOperationException("実装してください !!");
+        CampaignDao campaignDao = domaProvider.getDao(CampaignDao.class);
+        return templateEngine.render("index", "campaigns", campaignDao.selectAll());
     }
 
     private HttpResponse showCampaign(Long campaignId,
