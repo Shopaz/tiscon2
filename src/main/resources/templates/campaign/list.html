@@ -1,0 +1,61 @@
+/*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+*/
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Signature Collection</title>
+    <link href="http://fonts.googleapis.com/css?family=Exo:900" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css" rel="stylesheet"/>
+    <link href="/css/main.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="pusher">
+    <div th:replace="/shared/_header::header"></div>
+
+    <div class="full height image">
+        <div class="ui main container">
+            <div class="menu bar">
+            </div>
+            <div class="ui information container center aligned ">
+                <h2>キャンペーン一覧</h2>
+
+                    <table align="center">
+                        <tr style="border:solid">
+                            <th style="border:solid">キャンペーン名</th>
+                            <th style="border:solid">賛同者数</th>
+                            <th style="border:solid">必要賛成数</th>
+                        </tr>
+
+                        <div th:each="campaign : ${campaigns}">
+                            <tr style="border:solid">
+                                <th style="border:solid">
+                                    <a class="campaigns" th:href="@{~/campaign/{id}(id=${campaign.campaignId})}" th:text="${campaign.title}">title</a>
+                                </th>
+                                <th style="border:solid">
+                                    <a class="signature" th:text="${campaign.signatureCount}">signature</a>
+                                </th>
+                                <th style="border:solid">
+                                    <a class="campaigns" th:href="@{~/campaign/{id}(id=${campaign.campaignId})}" th:text="${campaign.goal}">goal</a>
+                                </th>
+                            </tr>
+                        </div>
+                    </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
