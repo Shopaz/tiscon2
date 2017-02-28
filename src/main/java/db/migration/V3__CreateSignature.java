@@ -17,7 +17,8 @@ public class V3__CreateSignature implements JdbcMigration {
                     "name VARCHAR(30) NOT NULL," +
                     "signature_comment CLOB," +
                     "campaign_id INTEGER NOT NULL," +
-                    "FOREIGN KEY (campaign_id) REFERENCES campaign(campaign_id)" +
+                    "FOREIGN KEY (campaign_id) REFERENCES campaign(campaign_id)," +
+                    "iine_count INTEGER DEFAULT 0"+
                     ")"
             );
         }

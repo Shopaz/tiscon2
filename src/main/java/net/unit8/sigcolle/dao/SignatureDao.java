@@ -7,6 +7,7 @@ import net.unit8.sigcolle.model.Signature;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
+import org.seasar.doma.Update;
 
 /**
  * @author kawasima
@@ -21,4 +22,10 @@ public interface SignatureDao {
 
     @Insert
     int insert(Signature signature);
+
+    @Select
+    Signature selectBySignatureId(Long signatureId);
+
+    @Update
+    int update(Signature signature);
 }

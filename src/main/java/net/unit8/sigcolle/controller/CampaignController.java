@@ -80,6 +80,19 @@ public class CampaignController {
         return response;
     }
 
+    public HttpResponse iine(SignatureForm form) {
+        Signature signature = new Signature();
+        SignatureDao signatureDao = domaProvider.getDao(SignatureDao.class);
+        signature = signatureDao.selectBySignatureId(Long.parseLong(form.getSignatureId()));
+
+        Long iineCount = signature.getIineCount() + 1;
+        signature.setIineCount(iineCount);
+        signatureDao.update(signature);
+
+        HttpResponse response = redirect("/campaign/" + form.getCampaignId(), SEE_OTHER);
+        return response;
+    }
+
     /**
      * 新規キャンペーン作成画面表示.
      *
@@ -148,7 +161,7 @@ public class CampaignController {
 
         SignatureDao signatureDao = domaProvider.getDao(SignatureDao.class);
         int signatureCount = signatureDao.countByCampaignId(campaignId);
-        List<Signature> signatures=  signatureDao.selectAllByCampaignId(campaignId);
+        List<Signature> signatures = signatureDao.selectAllByCampaignId(campaignId);
 
         return templateEngine.render("campaign/index",
                 "campaign", campaign,
@@ -156,7 +169,7 @@ public class CampaignController {
                 "signatureCount", signatureCount,
                 "signature", form,
                 "message", message,
-                "signatures",signatures
+                "signatures", signatures
         );
     }
 }

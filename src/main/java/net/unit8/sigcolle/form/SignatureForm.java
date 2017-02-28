@@ -16,6 +16,8 @@ public class SignatureForm extends FormBase {
     @DecimalMax("9999")
     private String campaignId;
 
+    private String signatureId;
+
     @NotNull
     @Length(min = 1, max = 50)
     private String name;
