@@ -22,6 +22,11 @@ xmlns:th="http://www.thymeleaf.org">
                     <div class="header" th:text="${message}">Thank you</div>
                 </div>
 
+                <div th:each="signature : ${signatures}">
+                    <a class="signature" th:href="@{~/signature/{id}(id=${signature.signatureId})}" th:text="${signature.signatureComment}">title</a>
+                </div>
+
+
                 <div class="ui grid">
                     <div class="ten wide column">
                         <div class="statement" th:utext="${campaign.statement}" ></div>
