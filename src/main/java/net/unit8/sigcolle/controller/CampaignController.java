@@ -16,14 +16,10 @@ import net.unit8.sigcolle.form.CampaignCreateForm;
 import net.unit8.sigcolle.form.CampaignForm;
 import net.unit8.sigcolle.form.SignatureForm;
 import net.unit8.sigcolle.model.Campaign;
-import net.unit8.sigcolle.model.CampaignWithSignitureCount;
 import net.unit8.sigcolle.model.Signature;
 import net.unit8.sigcolle.model.User;
 import org.pegdown.Extensions;
 import org.pegdown.PegDownProcessor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static enkan.util.HttpResponseUtils.RedirectStatusCode.SEE_OTHER;
 import static enkan.util.HttpResponseUtils.redirect;
@@ -137,25 +133,7 @@ public class CampaignController {
     public HttpResponse listCampaigns(Session session) {
         //throw new UnsupportedOperationException("実装してください !!");
         CampaignDao campaignDao = domaProvider.getDao(CampaignDao.class);
-        List<Campaign> campaigns = campaignDao.selectAll();
-        SignatureDao signatureDao = domaProvider.getDao(SignatureDao.class);
-        List<CampaignWithSignitureCount> campaignwithsigniturecount = new ArrayList<>();
-        for (Campaign campaign : campaigns){
-            int signatureCount = signatureDao.countByCampaignId(campaign.getCampaignId());
-            CampaignWithSignitureCount c = new CampaignWithSignitureCount();
-            c.setCampaignId(campaign.getCampaignId());
-            c.setStatement(campaign.getStatement());
-            c.setGoal(campaign.getGoal());
-            c.setCreateUserId(campaign.getCreateUserId());
-            c.setSignatureCount(Long.valueOf(signatureCount));
-            c.setTitle(campaign.getTitle());
-            campaignwithsigniturecount.add(c);
-        }
-        return templateEngine.render("campaign/list",
-                "campaigns", campaignwithsigniturecount
-
-        );
-        //return templateEngine.render("index", "campaigns", campaignDao.selectAll());
+        return templateEngine.render("index", "campaigns", campaignDao.selectAll());
     }
 
     private HttpResponse showCampaign(Long campaignId,

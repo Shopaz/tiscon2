@@ -22,10 +22,34 @@ xmlns:th="http://www.thymeleaf.org">
                     <div class="header" th:text="${message}">Thank you</div>
                 </div>
 
+
                 <div class="ui grid">
+
+
+
                     <div class="ten wide column">
                         <div class="statement" th:utext="${campaign.statement}" ></div>
                     </div>
+
+
+
+                    <div class="ten wide column">
+                        <h2>コメント一覧</h2>
+                        <div class="statement" th:each="signature : ${signatures}">
+                            <p class="signature" th:href="@{~/signature/{id}(id=${signature.signatureId})}" th:text="${signature.name}+' : '+${signature.signatureComment}">name:title</p>
+                           <form class="ui form" method="get" th:action="@{~/signature/{id}(id=${signature.signatureId})}" >
+                                <button class="button">いいね！</button>
+                                
+                                    <span th:text="${signature.likeCount}">345</span>
+
+
+
+                            </form>
+
+
+                        </div>
+                    </div>
+
                     <div class="six wide column">
                         <h2>今すぐ賛同</h2>
                         <p>
